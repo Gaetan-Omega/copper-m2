@@ -111,7 +111,12 @@ export async function askCopper(
       }
       // Only replace an empty reply, never add to a real one.
       done(snapshot(steps, reply.trim() ? reply : NO_ANSWER, "done"));
-    } catch {
+    } catch (error) {
+      // Show the cause in the terminal running the app; the shopper sees an apology.
+      console.error(
+        "[ask-copper]",
+        error instanceof Error ? error.message : String(error),
+      );
       done(snapshot(steps, reply || FAILED, "error"));
     }
   })();

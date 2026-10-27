@@ -53,7 +53,7 @@ function dateLabel(date: string): string {
 }
 
 /** Renders the **bold** and `code` marks in a thought summary. */
-function Markdown({ text }: { text: string }) {
+export function Markdown({ text }: { text: string }) {
   return (
     <>
       {text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g).map((piece, i) => {
@@ -519,7 +519,7 @@ export function AnswerSteps({
             </div>
           )}
           <p className="text-sm whitespace-pre-wrap">
-            {progress.reply}
+            <Markdown text={progress.reply} />
             {working && (
               <span aria-hidden className="animate-pulse">
                 ▍
